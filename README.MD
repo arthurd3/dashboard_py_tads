@@ -1,3 +1,7 @@
+Inicializar o VENV 
+
+node setup.js
+
 Acessar o Ambiente Virtual =>
 
 Linux:
@@ -13,3 +17,7 @@ Windows (PowerShell):
 Executar o App => 
 
 python dashboard.py
+
+PARA SAIR DO AMBIENTE VIRTUAL =>
+
+deactivate
