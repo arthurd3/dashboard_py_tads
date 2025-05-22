@@ -21,3 +21,11 @@ python dashboard.py
 PARA SAIR DO AMBIENTE VIRTUAL =>
 
 deactivate
+
+
+Ao Inicializar o Programa 
+
+http://127.0.0.1:8050/
+
+
+O Site sera aberto nessa porta .
