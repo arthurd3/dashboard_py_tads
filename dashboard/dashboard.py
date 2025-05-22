@@ -1,8 +1,19 @@
 import plotly.express as px
+import pandas as pd
 
-dados_x = [1, 2, 3, 4, 5]
-dados_y = [10, 15, 13, 17, 20]
+df = pd.read_csv('train.csv')
 
-fig = px.line(x=dados_x, y=dados_y)
+print(df.head())
+
+age = 'Age'
+fare = 'Fare'
+
+fig = px.scatter(
+    df, 
+    x=age, 
+    y=fare, 
+    title='Idade vs Tarifa - Titanic',
+    labels={age: 'Idade', fare: 'Tarifa'} 
+)
 
 fig.show()
