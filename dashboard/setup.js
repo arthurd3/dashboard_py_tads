@@ -1,6 +1,8 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
+const os = require('os');
 
+const isWindows = os.platform() === 'win32';
 const venvDir = 'venv';
 
 console.log('🚀 Iniciando o setup do projeto...');
@@ -12,14 +14,24 @@ if (fs.existsSync(venvDir)) {
     execSync('python -m venv venv', { stdio: 'inherit' });
 }
 
-console.log('⚙️  Ativando ambiente virtual e instalando dependências...');
+console.log('⚙️  Instalando dependências...');
 
 try {
-    execSync('venv/bin/pip install --upgrade pip', { stdio: 'inherit' });
-    execSync('venv/bin/pip install -r requirements.txt', { stdio: 'inherit' });
+    const pipCmd = isWindows ? 'venv\\Scripts\\pip.exe' : 'venv/bin/pip';
+    execSync(`${pipCmd} install --upgrade pip`, { stdio: 'inherit' });
+    execSync(`${pipCmd} install -r requirements.txt`, { stdio: 'inherit' });
+
     console.log('✅ Setup concluído!');
-    console.log('👉 Para ativar o ambiente virtual manualmente:');
-    console.log('source venv/bin/activate');
+
+    if (isWindows) {
+        console.log('👉 Para ativar o ambiente virtual:');
+        console.log('CMD:      venv\\Scripts\\activate.bat');
+        console.log('PowerShell: venv\\Scripts\\Activate.ps1');
+    } else {
+        console.log('👉 Para ativar o ambiente virtual:');
+        console.log('source venv/bin/activate');
+    }
+
 } catch (err) {
-    console.error('❌ Ocorreu um erro:', err);
+    console.error('❌ Ocorreu um erro:', err.message);
 }
